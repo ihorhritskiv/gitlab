@@ -1,0 +1,52 @@
+version: '3.3'
+
+services:
+  redis:
+    restart: always
+    image: sameersbn/redis:latest
+    command:
+      - --loglevel warning
+    volumes:
+      - redis:/var/lib/redis
+
+  postgresql:
+    restart: always
+    image: sameersbn/postgresql:latest
+    volumes:
+      - postgresql:/var/lib/postgresql
+    environment:
+      - DB_USER=gitlab
+      - DB_PASS=password
+      - DB_NAME=gitlabhq_production
+      - DB_EXTENSION=pg_trgm
+
+  gitlab:
+    restart: always
+    image: sameersbn/gitlab:latest
+    depends_on:
+      - redis
+      - postgresql
+    ports:
+      - "8080:80"
+      - "10022:22"
+    volumes:
+      - gitlab:/home/git/data
+    environment:
+      - DEBUG=false
+
+      - DB_ADAPTER=postgresql
+      - DB_HOST=postgresql
+      - DB_PORT=5432
+      - DB_USER=gitlab
+      - DB_PASS=password
+      - DB_NAME=gitlabhq_production
+
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+      - GITLAB_HTTPS=false
+      - SSL_SELF_SIGNED=false
+
+      - GITLAB_HOST=localhost
+      - GITLAB_PORT=8080
+      - GITLAB_SSH_PORT=10022
