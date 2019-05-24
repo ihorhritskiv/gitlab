@@ -28,6 +28,7 @@ services:
       - postgresql
     ports:
       - "10080:80"
+      - "10443:443"
       - "10022:22"
     volumes:
       - gitlab_data:/home/git/data
@@ -47,8 +48,8 @@ services:
       - GITLAB_HTTPS=true
       - SSL_SELF_SIGNED=false
 
-      - GITLAB_HOST=http://git.algotrader.com
-      - GITLAB_PORT=10080
+      - GITLAB_HOST=git.algotrader.com
+      - GITLAB_PORT=10443
       - GITLAB_SSH_PORT=10022
       - GITLAB_SECRETS_DB_KEY_BASE=VNjdThRtRVhvvrpCCwPCNfhC7cvxk9kPjXgrLtwmLTWx4L4CCbTbTKmxKhnqrHNv
       - GITLAB_SECRETS_SECRET_KEY_BASE=4b94HW9WNwVbHFxxjhfsCqwq4XmPsKPKT4m9pmT9mrdVHz7VWnc34cL4JxV7vhzf
