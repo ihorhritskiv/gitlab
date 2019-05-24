@@ -51,6 +51,8 @@ services:
       - GITLAB_PORT=8080
       - GITLAB_SSH_PORT=10022
       - GITLAB_SECRETS_DB_KEY_BASE=VNjdThRtRVhvvrpCCwPCNfhC7cvxk9kPjXgrLtwmLTWx4L4CCbTbTKmxKhnqrHNv
+      - GITLAB_SECRETS_SECRET_KEY_BASE=4b94HW9WNwVbHFxxjhfsCqwq4XmPsKPKT4m9pmT9mrdVHz7VWnc34cL4JxV7vhzf
+      - GITLAB_SECRETS_OTP_KEY_BASE=9b3jCmXm3kct7kNxdNjcrdM7794b3vsJ9ch4vd9MbtfjkbKqc7F9RqXfmN4JxVVd
 volumes:
     redis_db:
       driver: local
