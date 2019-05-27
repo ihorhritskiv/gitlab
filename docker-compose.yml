@@ -31,7 +31,7 @@ services:
       - "10443:443"
       - "10022:22"
     volumes:
-      - gitlab_data:/home/git/data
+      - data:/home/git/data
     environment:
       - DEBUG=false
 
@@ -57,9 +57,15 @@ services:
 
       - GITLAB_ROOT_PASSWORD=gitlab
 volumes:
-    redis_db:
-      driver: local
-    postgresql_db:
-      driver: local
-    gitlab_data:
-      driver: local
+  redis_db:
+    driver: vsphere
+    driver_opts:
+      size: 2gb
+  postgresql_db:
+    driver: vsphere
+    driver_opts:
+      size: 2gb
+  data:
+    driver: vsphere
+    driver_opts:
+      size: 10gb
